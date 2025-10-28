@@ -1,21 +1,22 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 
-app.use(express.json()); // 允许解析 JSON Body
+app.use(express.json());
 
-// GET 测试
-app.get('/', (req, res) => {
-  res.send('Hello World 👋');
+// 首页 GET
+app.get("/", (req, res) => {
+  res.send("Hello World 👋");
 });
 
-// POST 测试
-app.post('/webhook', (req, res) => {
-  console.log('Received:', req.body);
-
+// 测试 POST
+app.post("/", (req, res) => {
   res.json({
-    reply: `你说了：“${req.body.message}”`,
+    message: "POST 收到 ✅",
+    body: req.body
   });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Running on ${PORT}`));
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log("Server running on port", port);
+});
